@@ -18,7 +18,7 @@ internal class ArithmaticExpression
     {
         Value = value;
         Operator = @operator;
-        UsedNumbers = leftChild.UsedNumbers.Union(rightChild.UsedNumbers);
+        UsedNumbers = leftChild.UsedNumbers.Concat(rightChild.UsedNumbers);
         LeftChild = leftChild;
         RightChild = rightChild;
     }
