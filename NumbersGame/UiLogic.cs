@@ -23,4 +23,12 @@ static class UiLogic
 
         return new ProblemStatement(numbers, target);
     }
+
+    internal static void WriteReport(ArithmaticExpression? expression)
+    {
+        string report = expression?.ToString() ?? "No solution found.";
+
+        Console.WriteLine(report);
+        Console.WriteLine();
+    }
 }

@@ -6,4 +6,9 @@
     }
 
     public int Value { get; }
+
+    public override string ToString()
+    {
+        return $@"{Value} = {Value}";
+    }
 }
