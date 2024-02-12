@@ -1,5 +1,4 @@
-﻿
-namespace NumbersGameRedesigned.Domain;
+﻿namespace NumbersGameRedesigned.Domain;
 
 internal class ExactSolver
 {

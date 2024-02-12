@@ -1,26 +1,16 @@
-﻿
-using NumbersGameRedesigned.Common;
+﻿using NumbersGameRedesigned.Common;
+using NumbersGameRedesigned.Domain.Expressions;
 
 namespace NumbersGameRedesigned.Domain;
 
 internal class ExpressionStream
 {
     //old algo was =,+,-,-,*,/,/
-    public IEnumerable<Expression> DistinctFor(IEnumerable<int> inputNumbers) => 
+    public IEnumerable<Expression> DistinctFor(IEnumerable<int> inputNumbers) =>
         inputNumbers.IsEmpty() ? Enumerable.Empty<Expression>()
-        : inputNumbers.Skip(1).IsEmpty() ? new Expression[] { new Literal(inputNumbers.Single()) } 
-        : Enumerable.Empty<Expression>();
-}
+        : new[] { Add(inputNumbers) };
 
-internal class Literal : Expression
-{
-    public override int Value { get; }
-
-    public Literal(int value)
-    {
-        Value = value;
-    }
-
-    public override string ToString() =>
-        $"{Value}";
+    private Expression Add(IEnumerable<int> numbers) =>
+        numbers.Select<int, Expression>(number => new Literal(number))
+            .Aggregate((left, next) => new Add(left, next));
 }
