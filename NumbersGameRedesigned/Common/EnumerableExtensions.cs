@@ -30,4 +30,22 @@ internal static class EnumerableExtensions
 
     public static Partition<T> AsPartition<T>(this IEnumerable<T> sequence) =>
         new Partition<T>(sequence);
+
+    public static (IEnumerable<T> prefix, T last) ExtractLast<T>(this IEnumerable<T> sequence)
+    {
+        List<T> prefix = new List<T>();
+        using (IEnumerator<T> enumerator = sequence.GetEnumerator())
+        {
+            enumerator.MoveNext();
+            T last = enumerator.Current;
+
+            while (enumerator.MoveNext())
+            {
+                prefix.Add(last);
+                last = enumerator.Current;
+            }
+
+            return (prefix, last);
+        }
+    }
 }

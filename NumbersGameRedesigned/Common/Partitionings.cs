@@ -16,8 +16,6 @@ class Partitionings<T>
     }
 
     public IEnumerable<Partitioning<T>> All() =>
-        new[]
-        {
-            new Partitioning<T>(EntireSequence.Select(obj => new Partition<T>(obj)))
-        };
+        new Partitioning<T>(EntireSequence.AsPartition())
+            .ExpandEndlessly(partitioning => partitioning.Expand());
 }

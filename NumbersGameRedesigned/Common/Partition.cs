@@ -16,6 +16,10 @@ internal class Partition<T> : IEnumerable<T>
 
     private static Partition<T> Empty => new Partition<T>(Enumerable.Empty<T>());
 
+    public IEnumerable<(Partition<T> left, Partition<T> right)> SplitAscending() =>
+        Content.IsEmpty() ? new[] {(Partition<T>.Empty, Partition<T>.Empty)}
+            : SplitAndPrependLeft(Content.First(), Content.Skip(1));
+
     private IEnumerable<(Partition<T> left, Partition<T> right)> Split(
         IEnumerable<T> sequence) =>
         sequence.IsEmpty() ? new[] { (Partition<T>.Empty, Partition<T>.Empty) }
@@ -25,6 +29,19 @@ internal class Partition<T> : IEnumerable<T>
         T head,
         IEnumerable<T> tail) =>
         Combine(TrivialSplit(head), Split(tail).ToList());
+
+    private IEnumerable<(Partition<T> left, Partition<T> right)> SplitAndPrependLeft(
+        T leftHead, IEnumerable<T> toSplit) =>
+        Split(toSplit)
+            .Select(split => Prepend(leftHead, split.left, split.right));
+
+    private (Partition<T> left, Partition<T> right) Prepend(
+        T leftHead, Partition<T> left, Partition<T> right) =>
+            (new Partition<T>(
+                new[] 
+                {
+                    leftHead 
+                }.Concat(left)), right);
 
     private IEnumerable<(Partition<T> left, Partition<T> right)> Combine(
         IEnumerable<(Partition<T> left, Partition<T> right)> head,
