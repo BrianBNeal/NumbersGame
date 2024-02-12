@@ -1,20 +1,21 @@
-﻿
-//repeat until no input
-//read input numbers
-//find an expression
-//print the expression
-
-//problem statements list
-//solver
-//print
-
-using NumbersGameRedesigned.Common;
+﻿using NumbersGameRedesigned.Common;
 using NumbersGameRedesigned.Domain;
 
-ExpressionStreamDemo();
+ExpressionStreamDemo();  //dev mode
+//ProductionBehavior(); //production mode
 
 
-static void ExpressionStreamDemo() => // a way to view the workings of the ExpressionStream for dev purposes
+
+
+
+
+
+
+
+
+
+
+static void ExpressionStreamDemo() => // for dev purposes
     InputNumbersSequence()
         .Select(new ExpressionStream().DistinctFor)
         .SelectMany(expressions => Report(expressions, "No expressions found."))
