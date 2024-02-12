@@ -1,13 +1,18 @@
 ﻿namespace NumbersGameRedesigned.Common;
 internal static class TextReaderExtensions
 {
-    public static IEnumerable<string> IncomingLines(this TextReader reader) =>
-        reader.NullableIncomingLines().TakeWhile(line => line is not null);
+    public static IEnumerable<string> IncomingLines(
+        this TextReader reader,
+        Action prompt) =>
+        reader.NullableIncomingLines(prompt).TakeWhile(line => line is not null);
 
-    private static IEnumerable<string> NullableIncomingLines(this TextReader reader)
+    private static IEnumerable<string> NullableIncomingLines(
+        this TextReader reader,
+        Action prompt)
     {
         while (true)
         {
+            prompt();
             yield return reader.ReadLine();
         }
     }

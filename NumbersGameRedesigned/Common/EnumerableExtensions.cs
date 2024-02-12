@@ -11,4 +11,17 @@ internal static class EnumerableExtensions
             destination.WriteLine(line);
         }
     }
+
+    public static bool AllNotEmpty<T>(this IEnumerable<T> sequence, Func<T, bool> predicate)
+    {
+        bool any = false;
+
+        foreach (T obj in sequence)
+        {
+            if (!predicate(obj)) return false;
+            any = true;
+        }
+
+        return any;
+    }
 }

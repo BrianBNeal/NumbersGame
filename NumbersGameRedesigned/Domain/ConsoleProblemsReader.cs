@@ -7,5 +7,8 @@ internal class ConsoleProblemsReader
         RawNumbersSequence.Select(inputs => new ProblemStatement(inputs));
 
     private IEnumerable<IEnumerable<int>> RawNumbersSequence =>
-        Console.In.IncomingLines().Select(line => line.ToNonNegativeInts());
+        Console.In.IncomingLines(PromptInputNumbers).NonNegativeIntegerSequences();
+
+    private void PromptInputNumbers() =>
+        Console.Write(" Input numbers: ");
 }

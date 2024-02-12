@@ -3,8 +3,13 @@
 namespace NumbersGameRedesigned.Common;
 internal static class StringExtensions
 {
-    public static IEnumerable<int> ToNonNegativeInts(this string s) =>
-        Regex.Matches(s, @"\d+")
-            .Select(match => match.Value)
-            .Select(int.Parse);
+    public static IEnumerable<IEnumerable<int>> NonNegativeIntegerSequences(this IEnumerable<string> lines) =>
+        lines.Select(line => line.Split(new[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries))
+            .Select(stretches => stretches.Select(stretch =>
+                (
+                    correct: int.TryParse(stretch, out int value) && value >= 0,
+                    value
+                )))
+            .Where(matches => matches.AllNotEmpty(tuple => tuple.correct))
+            .Select(matches => matches.Select(tuple => tuple.value));
 }
