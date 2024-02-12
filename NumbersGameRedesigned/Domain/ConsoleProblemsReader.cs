@@ -2,8 +2,24 @@
 
 namespace NumbersGameRedesigned.Domain;
 
+internal class ConsoleInputsReader
+{
+    private string _promptLabel;
+    public ConsoleInputsReader(string promptLabel = "Input numbers: ")
+    {
+        _promptLabel = promptLabel;
+    }
+
+    public IEnumerable<IEnumerable<int>> ReadAll() =>
+        Console.In.IncomingLines(Prompt).NonNegativeIntegerSequences();
+
+    private void Prompt() =>
+        Console.Write(_promptLabel);
+}
+
 internal class ConsoleProblemsReader
 {
+    private ConsoleInputsReader InputsReader { get; } = new ConsoleInputsReader(" Input numbers: ");
     public IEnumerable<ProblemStatement> ReadAll() =>
         RawNumbersSequence.Select(tuple => new ProblemStatement(tuple.inputs, tuple.result));
 
@@ -12,13 +28,13 @@ internal class ConsoleProblemsReader
             .Zip(DesiredResults, (inputs, result) => (inputs, result));
 
     private IEnumerable<IEnumerable<int>> InputNumberSequences =>
-        Console.In.IncomingLines(PromptInputNumbers).NonNegativeIntegerSequences();
+        InputsReader.ReadAll();
 
     private IEnumerable<int> DesiredResults =>
         Console.In.IncomingLines(PromptDesiredResult).SingleNonNegativeIntegers();
 
     private void PromptInputNumbers() =>
-        Console.Write("Input numbers: ");
+        Console.Write(" Input numbers: ");
 
     private void PromptDesiredResult() =>
         Console.Write("Desired result: ");
