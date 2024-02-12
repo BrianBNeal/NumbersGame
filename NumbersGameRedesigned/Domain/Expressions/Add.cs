@@ -1,17 +1,8 @@
 ﻿namespace NumbersGameRedesigned.Domain.Expressions;
 
-internal class Add : Expression
+internal class Add : BinaryExpression
 {
-    private Expression Left { get; }
-    private Expression Right { get; }
-
-    public override int Value =>
-        Left.Value + Right.Value;
-    public Add(Expression left, Expression right)
-    {
-        Left = left;
-        Right = right;
-    }
-    public override string ToString() =>
-        $"{Left} + {Right}";
+    public Add(Expression left, Expression right) : base(left, right) { }
+    protected override string OperatorToString => "+";
+    protected override int Combine(int left, int right) => left + right;
 }

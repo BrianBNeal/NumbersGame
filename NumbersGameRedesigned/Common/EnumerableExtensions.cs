@@ -27,4 +27,7 @@ internal static class EnumerableExtensions
 
         return any;
     }
+
+    public static Partition<T> AsPartition<T>(this IEnumerable<T> sequence) =>
+        new Partition<T>(sequence);
 }
