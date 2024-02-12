@@ -9,8 +9,15 @@
 //print
 
 using NumbersGameRedesigned.Common;
+using NumbersGameRedesigned.Domain;
 
-ProblemStatements().WriteLinesTo(Console.Out);
+ProblemStatements()
+    .Select(problem => new ExactSolver().DistinctExpressionsFor(problem))
+    .SelectMany(expressions => expressions
+        .Select((expression, index) =>
+            $"{index + 1, 3}. {expression} = {expression.Value}")
+        .DefaultIfEmpty("No solutions for the problem."))
+    .WriteLinesTo(Console.Out);
 
 static IEnumerable<ProblemStatement> ProblemStatements() =>
         new ConsoleProblemsReader().ReadAll();

@@ -1,4 +1,6 @@
-﻿public class ProblemStatement
+﻿namespace NumbersGameRedesigned.Domain;
+
+public class ProblemStatement
 {
     public IEnumerable<int> InputNumbers { get; }
     public int DesiredResult { get; }

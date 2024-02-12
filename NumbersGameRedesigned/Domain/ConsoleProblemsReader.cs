@@ -1,5 +1,6 @@
 ﻿using NumbersGameRedesigned.Common;
-using System.Text.RegularExpressions;
+
+namespace NumbersGameRedesigned.Domain;
 
 internal class ConsoleProblemsReader
 {
