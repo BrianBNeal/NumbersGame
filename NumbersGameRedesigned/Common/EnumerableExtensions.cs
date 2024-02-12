@@ -1,6 +1,9 @@
 ﻿namespace NumbersGameRedesigned.Common;
 internal static class EnumerableExtensions
 {
+    public static bool IsEmpty<T>(this IEnumerable<T> sequence) =>
+        !sequence.Any();
+
     public static void WriteLinesTo<T>(this IEnumerable<T> sequence, TextWriter destination) =>
         sequence.Select(obj => $"{obj}").WriteLinesTo(destination);
 

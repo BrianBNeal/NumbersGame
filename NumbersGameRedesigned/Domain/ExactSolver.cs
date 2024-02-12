@@ -12,9 +12,3 @@ internal class ExactSolver
             .DistinctFor(problem.InputNumbers)
             .Where(expression => expression.Value == problem.DesiredResult);
 }
-
-internal class ExpressionStream
-{
-    public IEnumerable<Expression> DistinctFor(IEnumerable<int> inputNumbers) =>
-        Enumerable.Empty<Expression>();
-}

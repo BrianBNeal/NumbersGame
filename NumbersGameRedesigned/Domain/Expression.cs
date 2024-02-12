@@ -1,6 +1,6 @@
 ﻿namespace NumbersGameRedesigned.Domain;
 
-internal class Expression
+abstract class Expression
 {
-    public int Value { get; } = 0;
+    public abstract int Value { get; }
 }

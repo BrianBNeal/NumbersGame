@@ -28,7 +28,7 @@ static void ProductionBehavior() =>
 
 static IEnumerable<string> Report(IEnumerable<Expression> expressions, string onEmpty) =>
     expressions
-        .Select((expression, index) => $"{index + 1,3}. {expression} = {expression.Value}")
+        .Select((expression, index) => $"{index + 1,3}.   {expression} = {expression.Value}")
         .DefaultIfEmpty(onEmpty);
 
 static IEnumerable<IEnumerable<int>> InputNumbersSequence() =>
