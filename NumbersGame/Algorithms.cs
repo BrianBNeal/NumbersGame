@@ -26,7 +26,7 @@ internal static class Algorithms
         Queue<ArithmaticExpression> combining = new(
             problem.InputNumbers.Select(x => new ArithmaticExpression(x)));
 
-        List<ArithmaticExpression> known = new();
+        HashSet<ArithmaticExpression> known = new();
 
         while (combining.TryDequeue(out ArithmaticExpression? current))
         {
