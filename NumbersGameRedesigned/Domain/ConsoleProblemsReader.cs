@@ -11,7 +11,7 @@ internal class ConsoleInputsReader
     }
 
     public IEnumerable<IEnumerable<int>> ReadAll() =>
-        Console.In.IncomingLines(Prompt).NonNegativeIntegerSequences();
+        Console.In.IncomingLines(Prompt).PositiveIntegerSequences();
 
     private void Prompt() =>
         Console.Write(_promptLabel);

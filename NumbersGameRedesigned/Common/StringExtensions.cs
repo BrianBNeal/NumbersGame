@@ -3,11 +3,11 @@
 namespace NumbersGameRedesigned.Common;
 internal static class StringExtensions
 {
-    public static IEnumerable<IEnumerable<int>> NonNegativeIntegerSequences(this IEnumerable<string> lines) =>
+    public static IEnumerable<IEnumerable<int>> PositiveIntegerSequences(this IEnumerable<string> lines) =>
         lines.Select(line => line.Split(new[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries))
             .Select(stretches => stretches.Select(stretch =>
                 (
-                    correct: int.TryParse(stretch, out int value) && value >= 0,
+                    correct: int.TryParse(stretch, out int value) && value > 0,
                     value
                 )))
             .Where(matches => matches.AllNotEmpty(tuple => tuple.correct))

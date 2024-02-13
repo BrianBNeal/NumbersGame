@@ -1,6 +1,25 @@
 ﻿namespace NumbersGameRedesigned.Common;
 internal static class EnumerableExtensions
 {
+    public static IEnumerable<IEnumerable<T>> CrossProduct<T>(
+        this IEnumerable<IEnumerable<T>> sequenceOfSequences)
+    {
+        T[][] data = sequenceOfSequences.Select(sequence => sequence.ToArray()).ToArray();
+        int[] indices = new int[data.Length];
+        int carryOver = 0;
+
+        while (carryOver == 0)
+        {
+            yield return indices.Select((column,row) => data[row][column]).ToList();
+            carryOver = 1;
+            for (int row = 0; carryOver > 0 && row < indices.Length; row++)
+            {
+                indices[row] += 1;
+                carryOver = indices[row] / data[row].Length;
+                indices[row] = indices[row] % data[row].Length;
+            }
+        }
+    }
     public static bool IsEmpty<T>(this IEnumerable<T> sequence) =>
         !sequence.Any();
 
