@@ -36,16 +36,18 @@ static class ExpressionExtensions
         
 
     public static IEnumerable<Expression> TryDivide(
-        this Expression head, IEnumerable<Expression> others)
+        this IEnumerable<Expression> head, IEnumerable<Expression> others)
     {
-        Expression current = head;
-        foreach (Expression other in others) 
-        {
-            if (other.Value != 1 || current.Value % other.Value != 0)
-                yield break;
-            current = new Divide(current, other);
-        }
+        return Enumerable.Empty<Expression>();
+        //Expression current = head;
+        
+        //foreach (Expression other in others) 
+        //{
+        //    if (other.Value != 1 || current.Value % other.Value != 0)
+        //        yield break;
+        //    current = new Divide(current, other);
+        //}
 
-        yield return current;
+        //yield return current;
     }
 }
