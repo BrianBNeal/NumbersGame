@@ -5,16 +5,6 @@ ExpressionStreamDemo();  //dev mode
 //ProductionBehavior(); //production mode
 
 
-
-
-
-
-
-
-
-
-
-
 static void ExpressionStreamDemo() => // for dev purposes
     InputNumbersSequence()
         .Select(new ExpressionStream().DistinctFor)

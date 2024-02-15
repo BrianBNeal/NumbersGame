@@ -46,5 +46,10 @@ internal class ExpressionStream
         head.Add(add).TrySubtract(subtract);
 
     private IEnumerable<Expression> CreateMultiplicative(Expression head, IEnumerable<Expression> multiply, IEnumerable<Expression> divide) =>
-        head.TryMultiply(multiply).TryDivide(divide);
+
+        //head.TryMultiply(multiply).TryDivide(divide);
+        
+        //alter this code so that it passes correctly into TryDivide
+
+        head.TryMultiply(multiply).SelectMany(multiplied => multiplied.TryDivide(divide));
 }
